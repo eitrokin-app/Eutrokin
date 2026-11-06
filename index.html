@@ -29,7 +29,7 @@ body[data-accent="midnight"]{--lime:#02c8e4;--aqua:#02c8e4;--line:#365775;--bg:#
 /* iOS Safari: prevent focus auto-zoom without disabling user pinch zoom */
 input,select,textarea{font-size:16px!important;line-height:1.35}input[type=date],input[type=time],input[type=number],input[type=text],input[type=search],input[type=url],input[type=email],textarea,select{font-size:16px!important}
 </style></head><body><div id="appToast" role="status" aria-live="polite" aria-atomic="true" hidden></div><header><img src="logo.png" alt="EUTROKIN Logo"><div><h1>EUTRO<span style="color:var(--lime)">∞</span>KIN</h1><small>Health · Nutrition · Movement</small></div></header><main>
-<section id="home"><div class="card"><div class="muted">DEIN START</div><h2>Willkommen bei EUTRO∞KIN</h2><p>Dein persönlicher Begleiter für Ernährung, Bewegung und Gewicht. Alle Einträge bleiben auf diesem Gerät.</p><div class="note">Dein persönlicher Start – richte zuerst dein Profil ein. Diese App ersetzt keine medizinische Betreuung.</div></div><div class="grid"><div class="card"><div class="muted">Letztes Gewicht</div><div class="stat" id="homeWeight">–</div></div><div class="card"><div class="muted">Zielgewicht</div><div class="stat" id="homeGoal">78 kg</div></div><div class="card"><div class="muted">Trainings diese Woche</div><div class="stat" id="homeTraining">0 / 3</div></div></div><div class="card"><h3>Persönliches Profil</h3><p id="homeName" class="muted"></p><button onclick="show('settings')">Profil und Ziele einrichten</button></div><div class="card"><h3>Dein nächster Schritt</h3><p class="muted">Gewicht erfassen, Mahlzeit dokumentieren oder eine Trainingseinheit starten.</p><div class="row home-actions"><button class="primary" onclick="show('weight')">Gewicht</button><button onclick="show('food')">Ernährung</button><button onclick="show('hiit')">Training</button></div></div></section>
+<section id="home"><div class="card" id="shiftDayCard"><div class="muted">DEIN TAG · FLEXIBEL PLANEN</div><h3 style="margin:8px 0">Heute passend zu deinem Dienst</h3><p class="muted" id="shiftDetected">Dienstplan wird geprüft.</p><label for="shiftTypeToday">Tagesart auswählen oder korrigieren</label><select id="shiftTypeToday"><option value="auto">Automatisch aus Dienstplan</option><option value="early">Früh-/Tagdienst</option><option value="night">Nachtdienst</option><option value="free">Frei / kein Dienst</option><option value="other">Anderer Dienst</option></select><div class="note" id="shiftDayAdvice" aria-live="polite"></div><p class="muted">Orientierung statt fester Essenszeiten. Keine medizinische oder individuelle Kalorienempfehlung.</p></div><div class="card" id="dailyMotivationCard"><div class="row" style="justify-content:space-between;align-items:center"><div><div class="muted">DEIN TAGESIMPULS</div><h3 style="margin:6px 0">Ein kleiner Schritt zählt</h3></div><label style="display:flex;align-items:center;gap:7px;flex:0 0 auto"><input type="checkbox" id="dailyMotivationToggle" style="width:auto;margin:0" checked> Anzeigen</label></div><p id="dailyMotivationText" style="line-height:1.5;margin:10px 0 2px"></p></div><div class="card"><div class="muted">DEIN START</div><h2>Willkommen bei EUTRO∞KIN</h2><p>Dein persönlicher Begleiter für Ernährung, Bewegung und Gewicht. Alle Einträge bleiben auf diesem Gerät.</p><div class="note">Dein persönlicher Start – richte zuerst dein Profil ein. Diese App ersetzt keine medizinische Betreuung.</div></div><div class="grid"><div class="card"><div class="muted">Letztes Gewicht</div><div class="stat" id="homeWeight">–</div></div><div class="card"><div class="muted">Zielgewicht</div><div class="stat" id="homeGoal">78 kg</div></div><div class="card"><div class="muted">Trainings diese Woche</div><div class="stat" id="homeTraining">0 / 3</div></div></div><div class="card"><h3>Persönliches Profil</h3><p id="homeName" class="muted"></p><button onclick="show('settings')">Profil und Ziele einrichten</button></div><div class="card"><h3>Dein nächster Schritt</h3><p class="muted">Gewicht erfassen, Mahlzeit dokumentieren oder eine Trainingseinheit starten.</p><div class="row home-actions"><button class="primary" onclick="show('weight')">Gewicht</button><button onclick="show('food')">Ernährung</button><button onclick="show('hiit')">Training</button></div></div></section>
 <section id="weight" class="hide"><h2>Gewicht & Fortschritt</h2><div class="card"><label>Gewicht in kg<input id="weightValue" type="number" min="25" max="350" step="0.1" placeholder="z. B. 88,0"></label><label>Datum<input id="weightDate" type="date"></label><button class="primary" onclick="addWeight()">Gewicht speichern</button></div><div class="card"><h3>Dein Ziel</h3><div class="row"><label>Startgewicht (kg)<input id="startWeight" type="number" step="0.1" value="88"></label><label>Zielgewicht (kg)<input id="goalWeight" type="number" step="0.1" value="78"></label></div><label>Zieldatum<input id="goalDate" type="date" value="2027-05-09"></label><button onclick="saveSettings()">Ziel speichern</button><p id="weightProgress" class="muted"></p><div class="progress"><div id="weightBar" style="width:0%"></div></div></div><div class="card"><h3>Körpermaße & Fototagebuch</h3><p class="muted">Dokumentiere deinen Fortschritt mit Datum, Bauch- und Taillenumfang. Fotos sind freiwillig und werden verkleinert lokal gespeichert.</p><label>Datum<input type="date" id="measureDate"></label><div class="row"><label>Bauchumfang (cm)<input type="number" id="bellyCm" min="20" max="300" step="0.1" placeholder="optional"></label><label>Taillenumfang (cm)<input type="number" id="waistCm" min="20" max="300" step="0.1" placeholder="optional"></label></div><label>Fortschrittsfoto<input type="file" id="measurePhoto" accept="image/*"></label><label>Notiz<input id="measureNote" maxlength="140" placeholder="z. B. Start, Monat 1, Ziel erreicht"></label><button class="primary" onclick="addMeasurement()">Fortschritt speichern</button><div id="measureList"></div></div><div class="card"><h3>Verlauf</h3><div id="weightList" class="mini muted">Noch keine Messungen.</div></div></section>
 <section id="food" class="hide"><h2>Ernährung</h2><div class="card"><h3>Mahlzeit erfassen</h3><label>Datum<input id="foodDate" type="date"></label><label>Mahlzeit<select id="foodType"><option>Frühstück</option><option>Abendessen</option><option>Snack</option></select></label><label>Beschreibung<textarea id="foodText" placeholder="z. B. Ofengemüse mit Dorade und etwas Kartoffeln"></textarea></label><label>Kalorien (optional, nur wenn bekannt)<input id="foodKcal" type="number" min="0" placeholder="Keine Schätzung erforderlich"></label><button class="primary" onclick="addFood()">Mahlzeit speichern</button></div><div class="card"><h3>Deine Ernährungsleitlinien</h3><p id="foodRules" class="mini"></p><button onclick="show('settings')">Ernährung anpassen</button><p class="muted">Foto- und Barcodeanalyse sowie KI-Rezepte sind in dieser Offline-Version noch nicht automatisiert. Du kannst Vorschläge aus ChatGPT manuell übernehmen.</p></div><div class="card"><h3>Mahlzeitenprotokoll</h3><div id="foodList" class="mini muted">Noch keine Einträge.</div></div></section>
 <section id="roster" class="hide"><h2>Mein Dienstplan</h2><div class="card"><h3>Kalender importieren</h3><p class="muted">Importiere deinen persönlichen Dienstplan als .ics-Datei. Die Termine werden nur auf diesem Gerät gespeichert. Ein WebCal-Abonnement wird in dieser Version nicht automatisch synchronisiert.</p><div class="card" style="margin:12px 0"><h3>Kalenderverbindung (Testfunktion)</h3><p class="muted">Trage deinen persönlichen CareMan-WebCal-Link ausschließlich auf deinem eigenen Gerät ein. Kein Passwort nötig. Die App versucht die Aktualisierung beim Öffnen und bei aktiver Nutzung. Direkte Abrufe können durch CORS, HTTPS oder CareMan-Zugriffsbeschränkungen scheitern.</p><label>Persönliche WebCal- oder HTTPS-Kalenderadresse<input type="url" id="caremanUrl" placeholder="webcal://…/calendar/roster/…ics" autocomplete="off" spellcheck="false"></label><div class="row roster-actions"><button class="primary" onclick="saveCaremanUrl()">Verbindung speichern</button><button onclick="syncCareman(true)">Jetzt synchronisieren</button><button onclick="removeCaremanUrl()">Verbindung entfernen</button></div><p id="caremanStatus" class="muted" role="status">Nicht verbunden</p><p class="muted">Der Link ist ein geheimer Zugriffsschlüssel. Er bleibt im lokalen Browserspeicher und wird nicht in App-Dateien, Backups oder an andere Nutzer übernommen. Auf gemeinsam genutzten Geräten nicht einrichten.</p></div><label>Kalenderdatei auswählen<input type="file" id="rosterFile" accept=".ics,text/calendar" onchange="importRoster(event)"></label><div class="row"><button onclick="clearRoster()">Dienstplan löschen</button></div><p class="muted" id="rosterCount"></p></div><div class="card"><h3>Nächste Dienste und freie Tage</h3><div id="rosterList" class="mini"></div></div><div class="card"><h3>Planungshinweis</h3><p class="muted">Training und Mahlzeiten können an Früh-, Spät- und Nachtdienste angepasst werden. Automatische Empfehlungen sind noch nicht aktiviert; Diensttypen werden nur anhand der Kalendereinträge angezeigt.</p></div></section><section id="hiit" class="hide"><h2>Training · 3 × 15 Minuten</h2><div class="note">Bei Brustschmerz, Schwindel oder ungewöhnlicher Atemnot nicht trainieren. Bei bekannten Herz-Kreislauf-Erkrankungen oder früheren Belastungsbeschwerden vor hochintensivem Training ärztliche Belastungsfreigabe einholen. Bis dahin ist dies ein Planungs- und Demonstrationsmodul.</div><div class="card"><p class="muted">Du kannst deine Trainingstage und das Intervall in den Einstellungen selbst festlegen. Die 15 Übungen sind Vorschläge und können pro Trainingstag durch eigene Übungen ersetzt werden.</p><div class="row day-actions"><button class="chip sel" id="day0" onclick="setDay(0)">Tag 1<br>Bauch & Rücken</button><button class="chip" id="day1" onclick="setDay(1)">Tag 2<br>Tiefe Muskulatur</button><button class="chip" id="day2" onclick="setDay(2)">Tag 3<br>Schultern & Beine</button></div><h3 id="dayTitle" style="margin-top:18px"></h3><p class="muted">3 Min. Aufwärmen · 10 Min. Zirkel (5 Übungen × 2 Runden) · 2 Min. Abwärmen</p><label>Intervall<select id="interval" onchange="resetTimer()"><option value="30">30 Sek. Übung / 30 Sek. Erholung</option><option value="40">40 Sek. Übung / 20 Sek. Erholung</option></select></label><div id="exercises"></div></div><div class="card"><h3>Trainings-Timer</h3><p id="timerLabel" style="text-align:center">Bereit</p><div class="timer" id="timerDisplay">15:00</div><div class="progress"><div id="timerBar" style="width:0%"></div></div><p id="timerExercise" style="text-align:center;color:var(--aqua)"></p><div class="row"><button class="primary" id="timerStart" onclick="toggleTimer()">Start</button><button onclick="resetTimer()">Zurücksetzen</button></div><p class="muted">Die App muss während des Timers im Vordergrund bleiben. Ton und Benachrichtigungen können vom iPhone eingeschränkt werden.</p><button class="yellow" onclick="completeTraining()">Einheit als abgeschlossen speichern</button></div><div class="card"><h3>Aktivität erfassen</h3><p class="muted">Laufen, Wandern, Radfahren, Krafttraining und andere Aktivitäten dokumentieren. Einträge bleiben lokal auf diesem Gerät.</p><label>Sportart<select id="activityType"><option>Laufen</option><option>Wandern</option><option>Radfahren</option><option>Krafttraining</option><option>Schwimmen</option><option>Spazierengehen</option><option>Andere Aktivität</option></select></label><label>Datum<input type="date" id="activityDate"></label><label>Dauer in Minuten<input type="number" id="activityMinutes" min="1" max="1440" step="1" inputmode="numeric" placeholder="z. B. 45"></label><label>Notiz (optional)<input type="text" id="activityNote" maxlength="160" placeholder="z. B. 5 km, lockeres Tempo"></label><button class="primary" onclick="addActivity()">Aktivität speichern</button></div><div class="card"><h3>Trainingstagebuch</h3><div id="trainingList" class="mini muted"></div></div></section>
@@ -132,5 +132,78 @@ function notify(message){
  clearTimeout(eutroToastTimer);
  eutroToastTimer=setTimeout(()=>{el.hidden=true},3200);
 }
+</script>
+
+<script>
+/* Optional daily motivation: offline, deterministic, no external services. */
+(function(){
+ const key='eutrokin-daily-motivation-visible';
+ const quotes=[
+  'Du musst heute nicht perfekt sein. Ein kleiner Anfang genügt.',
+  'Konstanz bedeutet nicht, jeden Tag dasselbe zu leisten.',
+  'Auch Regeneration ist ein Teil deines Trainings.',
+  'Plane den nächsten machbaren Schritt, nicht den perfekten Tag.',
+  'Ein kurzer Spaziergang ist besser als ein unerreichbarer Plan.',
+  'Dein Fortschritt entsteht aus vielen kleinen Entscheidungen.',
+  'Dein Dienstplan bestimmt den Rhythmus, nicht deinen Wert.',
+  'Beginne mit fünf Minuten. Danach entscheidest du neu.',
+  'Eine Pause löscht keinen bereits erreichten Fortschritt.',
+  'Heute zählt, was zu deinem Alltag passt.',
+  'Ausreichend Schlaf ist kein verlorenes Training.',
+  'Du darfst Ziele anpassen und trotzdem dranbleiben.',
+  'Nicht jeder Tag muss ein Trainingstag sein.',
+  'Der nächste gute Schritt ist wichtiger als der letzte schwierige.'
+ ];
+ const toggle=document.getElementById('dailyMotivationToggle');
+ const message=document.getElementById('dailyMotivationText');
+ if(!toggle||!message)return;
+ const now=new Date();
+ const day=Math.floor(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())/86400000);
+ message.textContent=quotes[day%quotes.length];
+ const show=localStorage.getItem(key)!=='false';
+ toggle.checked=show;
+ message.hidden=!show;
+ toggle.addEventListener('change',()=>{
+  message.hidden=!toggle.checked;
+  try{localStorage.setItem(key,String(toggle.checked))}catch(e){/* storage unavailable */}
+ });
+})();
+</script>
+
+<script>
+/* Optional shift-aware daily guidance, local-only; does not alter personal records. */
+(function(){
+ const select=document.getElementById('shiftTypeToday');
+ const detected=document.getElementById('shiftDetected');
+ const advice=document.getElementById('shiftDayAdvice');
+ if(!select||!detected||!advice)return;
+ const key='eutrokin-shift-day-override-v1';
+ const templates={
+  early:'Früh-/Tagdienst: Bereite eine sättigende, gut transportierbare Mahlzeit und einen unkomplizierten proteinreichen Snack vor. Plane Bewegung flexibel nach Energie und Schlaf.',
+  night:'Nachtdienst: Plane vor dem Dienst eine vollwertige Mahlzeit und für die Nacht eine gut verträgliche Portion ein. Nach dem Dienst hat Schlaf Vorrang vor intensivem Training.',
+  free:'Freier Tag: Nutze deine verfügbare Zeit für eine ausgewogene Mahlzeit und Bewegung nach deinem Trainingsplan. Erholung ist ebenfalls ein gültiges Tagesziel.',
+  other:'Diensttag: Packe eine Mahlzeit und einen haltbaren Snack ein. Wähle Trainingszeit und Portionsgrößen nach tatsächlicher Belastung und Pausen.',
+  unknown:'Kein eindeutig zuordenbarer Dienst für heute. Wähle deine Tagesart aus, um einen passenden Planungshinweis zu erhalten.'
+ };
+ function dateLocal(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+ function classify(e){const title=String(e.title||'').toLowerCase();if(/nacht|night|19[:.]?00.{0,12}07[:.]?00/.test(title))return 'night';if(/früh|frueh|tagdienst|day shift/.test(title))return 'early';return 'other'}
+ function update(){
+  const date=dateLocal(new Date());
+  let entries=Array.isArray(db.roster)?db.roster.filter(e=>String(e.date||'').slice(0,10)===date):[];
+  const guess=entries.length?classify(entries[0]):'unknown';
+  detected.textContent=entries.length?'Kalender: '+entries.length+' Termin(e) heute. Die automatische Einordnung kann ungenau sein.':'Keine Kalendereinträge für heute. Das bedeutet nicht automatisch dienstfrei.';
+  let stored=null;try{stored=JSON.parse(localStorage.getItem(key)||'null')}catch(e){}
+  select.value=stored&&stored.date===date&&['early','night','free','other'].includes(stored.type)?stored.type:'auto';
+  advice.textContent=templates[select.value==='auto'?guess:select.value];
+ }
+ select.addEventListener('change',()=>{
+  const date=dateLocal(new Date());
+  try{if(select.value==='auto')localStorage.removeItem(key);else localStorage.setItem(key,JSON.stringify({date,type:select.value}))}catch(e){}
+  update();
+ });
+ const originalRender=render;
+ render=function(){originalRender();update()};
+ update();
+})();
 </script>
 </body></html>
