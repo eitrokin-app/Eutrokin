@@ -18,3 +18,16 @@
 ### Nächster Schritt
 
 - Testdaten exportieren und importieren; beschädigte JSON-Datei, Abbruch und Speichermangel testen. Danach sichere Export-/Import-Regressionschecks ergänzen.
+
+## 2026-11-14 – Synthetische Backup-Regressionschecks
+
+- Neue eigenständige Seite `test/backup-regression.html` angelegt (Commit `09504ac218ad13aa738c1a78e7d911af8e234b9c`).
+- Acht manuell startbare Prüfungen: gültige Sicherung, beschädigtes JSON, falsche App-Kennung, fehlende Pflichtliste, Größenlimit, Abbruch, simulierter Speicherfehler, Schreiben unter isoliertem Testschlüssel.
+- Kein Zugriff auf localStorage oder produktive Daten; keine Änderungen an `index.html` oder `test/index.html`.
+- Prüfregeln sind aus dem aktuellen Test-Import nachgebildet; dies ist **kein** automatisierter End-to-End-Test der tatsächlichen Importfunktion.
+
+### Prüfstand und offene Punkte
+
+- GitHub-Commit für die neue Testseite erfolgreich; Ausführung im iPhone-Browser noch nicht bestätigt.
+- Bitte `https://eitrokin-app.github.io/Eutrokin/test/backup-regression.html` öffnen und „Prüfungen starten“ antippen. Erwartet: 8 von 8 bestanden.
+- Danach echte Export-/Import- und Offline-Regressionschecks nur mit künstlichen Testdaten ergänzen.
