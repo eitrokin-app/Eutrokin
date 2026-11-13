@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EUTRO∞KIN · Backup-Regressionscheck (TEST)</title>
+<style>body{font:16px system-ui;background:#101820;color:#f4f7f8;max-width:720px;margin:auto;padding:22px}button{padding:12px;border:1px solid #6c9;background:#234;color:white;border-radius:8px}li{margin:12px 0}.ok{color:#8fdaac}.bad{color:#ff9999}small{color:#c6d1d4}</style></head><body>
+<h1>Backup-Regressionscheck · TEST</h1>
+<p>Isolierter, synthetischer Test. Liest und verändert <strong>keine</strong> App-Daten, keinen localStorage und keine privaten Gesundheitsdaten.</p>
+<button id="run">Prüfungen starten</button><ol id="results" aria-live="polite"></ol><p id="summary"></p>
+<p><small>Diese Tests prüfen die Import-Prüfregeln und das Verhalten einer simulierten Speicheroperation. Sie führen <strong>nicht</strong> den Import in test/index.html aus. iPhone- und Offline-Tests bleiben separat erforderlich.</small></p>
+<script>
+'use strict';
+const limit=10*1024*1024;
+function validateBackup(text,size){
+ if(size>limit)throw Error('Sicherung ist zu groß (maximal 10 MB).');
+ const x=JSON.parse(text);
+ if(!x||x.app!=='EUTROKIN'||!x.data||typeof x.data!=='object'||Array.isArray(x.data)||!Array.isArray(x.data.weights)||!Array.isArray(x.data.foods)||!Array.isArray(x.data.trainings)||!x.data.profile||typeof x.data.profile!=='object'||Array.isArray(x.data.profile)||!x.data.settings||typeof x.data.settings!=='object'||Array.isArray(x.data.settings))throw Error('Ungültige Sicherung');
+ return x.data;
+}
+function simulatedImport(text,size,confirmImport,store,current){
+ const candidate=validateBackup(text,size);
+ if(!confirmImport)return current;
+ store.setItem('eutro-test-v1:eutrokin-v1',JSON.stringify(candidate));
+ return candidate;
+}
+const sample=()=>({app:'EUTROKIN',version:2,data:{weights:[],foods:[],trainings:[],profile:{name:'SYNTHETISCH'},settings:{start:0,goal:0,date:''}}});
+const tests=[
+ ['Gültige synthetische Sicherung',()=>!!validateBackup(JSON.stringify(sample()),100)],
+ ['Beschädigtes JSON wird abgewiesen',()=>throws(()=>validateBackup('{',1))],
+ ['Falsche App-Kennung wird abgewiesen',()=>{let x=sample();x.app='ANDERE';return throws(()=>validateBackup(JSON.stringify(x),100))}],
+ ['Fehlende Pflichtliste wird abgewiesen',()=>{let x=sample();delete x.data.weights;return throws(()=>validateBackup(JSON.stringify(x),100))}],
+ ['Datei über 10 MiB wird abgewiesen',()=>throws(()=>validateBackup(JSON.stringify(sample()),limit+1))],
+ ['Abbruch erhält bisherigen Zustand',()=>{const old={keep:true};let calls=0;let got=simulatedImport(JSON.stringify(sample()),100,false,{setItem(){calls++}},old);return got===old&&calls===0}],
+ ['Simulierter Speicherfehler erhält bisherigen Zustand',()=>{const old={keep:true};let state=old;try{state=simulatedImport(JSON.stringify(sample()),100,true,{setItem(){throw Error('QuotaExceededError')}},state)}catch(e){}return state===old}],
+ ['Erfolgreicher Testschlüssel-Schreibvorgang',()=>{let key='',value='';let got=simulatedImport(JSON.stringify(sample()),100,true,{setItem(k,v){key=k;value=v}},{});return key==='eutro-test-v1:eutrokin-v1'&&JSON.parse(value).profile.name==='SYNTHETISCH'&&got.profile.name==='SYNTHETISCH'}]
+];
+function throws(fn){try{fn();return false}catch(e){return true}}
+document.getElementById('run').addEventListener('click',()=>{
+ const list=document.getElementById('results');list.replaceChildren();let passed=0;
+ for(const [name,fn] of tests){let ok=false;try{ok=!!fn()}catch(e){}if(ok)passed++;const li=document.createElement('li');li.className=ok?'ok':'bad';li.textContent=(ok?'BESTANDEN: ':'FEHLER: ')+name;list.append(li)}
+ document.getElementById('summary').textContent=passed+' von '+tests.length+' Prüfungen bestanden.';
+});
+</script></body></html>
