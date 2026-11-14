@@ -31,3 +31,10 @@
 - GitHub-Commit für die neue Testseite erfolgreich; Ausführung im iPhone-Browser noch nicht bestätigt.
 - Bitte `https://eitrokin-app.github.io/Eutrokin/test/backup-regression.html` öffnen und „Prüfungen starten“ antippen. Erwartet: 8 von 8 bestanden.
 - Danach echte Export-/Import- und Offline-Regressionschecks nur mit künstlichen Testdaten ergänzen.
+
+## 2026-11-14 – Backup-Regressionschecks erweitert
+
+- `test/backup-regression.html` von 8 auf 13 synthetische Prüfungen erweitert (Commit `855f78ff09b164a9f2c1401093d67c2bf9dac5c8`).
+- Zusätzliche Negativfälle: fehlendes Profil, fehlende Einstellungen, Objekt statt Liste, `null`-Datensatz und Weitergabe eines simulierten Speicherfehlers.
+- Darstellung an Anthrazit/Blau angepasst; keine Produktivdatei verändert.
+- Weiterhin nur nachgebildete Importlogik, kein End-to-End-Test der echten App; Browserlaufzeit und iPhone-Test ausstehend.
