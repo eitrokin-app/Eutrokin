@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EUTRO∞KIN · Backup-Regressionscheck (TEST)</title>
-<style>body{font:16px system-ui;background:#101820;color:#f4f7f8;max-width:720px;margin:auto;padding:22px}button{padding:12px;border:1px solid #6c9;background:#234;color:white;border-radius:8px}li{margin:12px 0}.ok{color:#8fdaac}.bad{color:#ff9999}small{color:#c6d1d4}</style></head><body>
+<style>body{font:16px system-ui;background:#202329;color:#f4f7f8;max-width:720px;margin:auto;padding:22px}button{padding:12px;border:1px solid #46505d;background:#1677ff;color:white;border-radius:8px}li{margin:12px 0}.ok{color:#8fdaac}.bad{color:#ff9999}small{color:#c6d1d4}</style></head><body>
 <h1>Backup-Regressionscheck · TEST</h1>
 <p>Isolierter, synthetischer Test. Liest und verändert <strong>keine</strong> App-Daten, keinen localStorage und keine privaten Gesundheitsdaten.</p>
 <button id="run">Prüfungen starten</button><ol id="results" aria-live="polite"></ol><p id="summary"></p>
@@ -29,6 +29,11 @@ const tests=[
  ['Datei über 10 MiB wird abgewiesen',()=>throws(()=>validateBackup(JSON.stringify(sample()),limit+1))],
  ['Abbruch erhält bisherigen Zustand',()=>{const old={keep:true};let calls=0;let got=simulatedImport(JSON.stringify(sample()),100,false,{setItem(){calls++}},old);return got===old&&calls===0}],
  ['Simulierter Speicherfehler erhält bisherigen Zustand',()=>{const old={keep:true};let state=old;try{state=simulatedImport(JSON.stringify(sample()),100,true,{setItem(){throw Error('QuotaExceededError')}},state)}catch(e){}return state===old}],
+ ['Fehlendes Profil wird abgewiesen',()=>{let x=sample();delete x.data.profile;return throws(()=>validateBackup(JSON.stringify(x),100))}],
+ ['Fehlende Einstellungen werden abgewiesen',()=>{let x=sample();delete x.data.settings;return throws(()=>validateBackup(JSON.stringify(x),100))}],
+ ['Listen als Objekt werden abgewiesen',()=>{let x=sample();x.data.foods={};return throws(()=>validateBackup(JSON.stringify(x),100))}],
+ ['Null als Datensatz wird abgewiesen',()=>{let x=sample();x.data=null;return throws(()=>validateBackup(JSON.stringify(x),100))}],
+ ['Speicherfehler wird weitergegeben',()=>{let x=sample();return throws(()=>simulatedImport(JSON.stringify(x),100,true,{setItem(){throw Error('QuotaExceededError')}},{}))}],
  ['Erfolgreicher Testschlüssel-Schreibvorgang',()=>{let key='',value='';let got=simulatedImport(JSON.stringify(sample()),100,true,{setItem(k,v){key=k;value=v}},{});return key==='eutro-test-v1:eutrokin-v1'&&JSON.parse(value).profile.name==='SYNTHETISCH'&&got.profile.name==='SYNTHETISCH'}]
 ];
 function throws(fn){try{fn();return false}catch(e){return true}}
