@@ -64,3 +64,9 @@
 - Lokaler Rechner in `test/index.html`: Produktname, optionaler Barcode als Notiz, Roh-/Trocken- oder Gekocht-Basis, kcal/100 g und Grammzahl. Berechnet kcal = kcal/100 g × Gramm / 100 und übernimmt Ergebnis in vorhandenes Mahlzeitenformular (Commit `7ef0cc34b0311df7b956221edb1ffe442c670f4a`).
 - Kein Barcode-Kamerascan, keine Produktdatenbankabfrage und keine automatische Nährwerterkennung; Werte werden manuell eingegeben. Speicherung erfolgt erst mit dem vorhandenen Button „Mahlzeit speichern“.
 - GitHub-Commit und Quelltext geprüft; iPhone-Funktionstest offen. Nur `test/`, keine Produktionsdaten geändert.
+
+## 2026-11-15 – Barcode-Produktabfrage (Test)
+
+- In `test/index.html` lässt sich eine Barcode-Nummer (8–14 Ziffern) nach ausdrücklichem Tippen auf „Produktdaten abrufen“ über die öffentliche Open-Food-Facts-API abfragen. Name und kcal/100 g werden bei vorhandenen Daten in den lokalen Portionsrechner übernommen (Commits `fba4b1b04b02596b3d94fa9b8c2fb0a9f1ee6055`, `53f321ce52c8c1dce324e097f14e53a68528bce9`).
+- Bei fehlenden Daten, nicht gefundenem Produkt oder Netzwerkfehler bleibt manuelle Eingabe möglich. Keine automatische Speicherung und keine Übertragung von Gesundheitsdaten; die eingegebene Barcode-Nummer wird bei Abfrage an Open Food Facts übertragen.
+- Ein Kamerascan von Barcodes ist **noch nicht** umgesetzt. iPhone-/Netzwerktest und API-Verfügbarkeit stehen aus. Keine Änderung an Produktion oder produktiven Nutzerdaten.
