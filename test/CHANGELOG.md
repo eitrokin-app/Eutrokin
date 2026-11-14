@@ -45,3 +45,9 @@
 - Nur die isolierte, rein synthetische Prüfseite verändert; kein Zugriff auf `localStorage`, produktive Dateien oder Gesundheitsdaten.
 - Quelltext und GitHub-Commit geprüft. **Noch offen:** Ausführung der 16 Tests auf dem iPhone sowie echter Datei-Export/-Import und Offline-Test in der Test-App. Diese Tests verwenden weiterhin eine Nachbildung, nicht den echten Import-Code.
 - Testlink: https://eitrokin-app.github.io/Eutrokin/test/backup-regression.html?v=20261115-16
+
+## 2026-11-15 – Ernährung anpassen: gezielte Navigation
+
+- `test/index.html`: Button „Ernährung anpassen“ öffnet weiterhin Einstellungen, scrollt nun aber direkt zum Feld `profileDiet` und setzt den Fokus darauf (Commit `821bb94f09dd5aef8555dab9179a5b4990adfb05`).
+- Quelltextanker und GitHub-Commit geprüft; iPhone-Laufzeittest steht aus.
+- Produktive `index.html` und Nutzerdaten unverändert.
