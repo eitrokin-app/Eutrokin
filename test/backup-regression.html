@@ -4,7 +4,7 @@
 <h1>Backup-Regressionscheck · TEST</h1>
 <p>Isolierter, synthetischer Test. Liest und verändert <strong>keine</strong> App-Daten, keinen localStorage und keine privaten Gesundheitsdaten.</p>
 <button id="run">Prüfungen starten</button><ol id="results" aria-live="polite"></ol><p id="summary"></p>
-<p><small>Diese Tests prüfen die Import-Prüfregeln und das Verhalten einer simulierten Speicheroperation. Sie führen <strong>nicht</strong> den Import in test/index.html aus. iPhone- und Offline-Tests bleiben separat erforderlich.</small></p>
+<p><small>Diese Tests prüfen die Import-Prüfregeln sowie einen simulierten Export-Import-Rundlauf und das Verhalten einer simulierten Speicheroperation. Sie führen <strong>nicht</strong> den Import in test/index.html aus. iPhone- und Offline-Tests bleiben separat erforderlich.</small></p>
 <script>
 'use strict';
 const limit=10*1024*1024;
@@ -34,6 +34,9 @@ const tests=[
  ['Listen als Objekt werden abgewiesen',()=>{let x=sample();x.data.foods={};return throws(()=>validateBackup(JSON.stringify(x),100))}],
  ['Null als Datensatz wird abgewiesen',()=>{let x=sample();x.data=null;return throws(()=>validateBackup(JSON.stringify(x),100))}],
  ['Speicherfehler wird weitergegeben',()=>{let x=sample();return throws(()=>simulatedImport(JSON.stringify(x),100,true,{setItem(){throw Error('QuotaExceededError')}},{}))}],
+ ['Export-Import-Rundlauf erhält Testdaten',()=>{const x=sample();x.data.weights=[{date:'2026-11-01',weight:80}];x.data.foods=[{name:'TEST'}];const got=validateBackup(JSON.stringify(x),new Blob([JSON.stringify(x)]).size);return JSON.stringify(got)===JSON.stringify(x.data)}],
+ ['Export bleibt nachträglich unverändert',()=>{const x=sample();const backup=JSON.stringify(x);x.data.profile.name='GEÄNDERT';return JSON.parse(backup).data.profile.name==='SYNTHETISCH'}],
+ ['Ungültige Sicherung schreibt nichts',()=>{let writes=0;const old={keep:true};let result=old;try{result=simulatedImport('{',1,true,{setItem(){writes++}},result)}catch(e){}return writes===0&&result===old}],
  ['Erfolgreicher Testschlüssel-Schreibvorgang',()=>{let key='',value='';let got=simulatedImport(JSON.stringify(sample()),100,true,{setItem(k,v){key=k;value=v}},{});return key==='eutro-test-v1:eutrokin-v1'&&JSON.parse(value).profile.name==='SYNTHETISCH'&&got.profile.name==='SYNTHETISCH'}]
 ];
 function throws(fn){try{fn();return false}catch(e){return true}}
