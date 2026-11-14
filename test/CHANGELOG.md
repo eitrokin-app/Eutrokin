@@ -58,3 +58,9 @@
 - Aufnahme wird weder hochgeladen noch gespeichert oder analysiert. Nach Auswahl erscheint nur ein Hinweis zur manuellen Beschreibung.
 - iOS entscheidet über Kamera-/Auswahldialog und Berechtigungen; eine separate Berechtigungsabfrage wird durch diese Technik nicht garantiert.
 - Quelltextänderung auf GitHub gespeichert; tatsächlicher iPhone-Kameratest offen. Produktivversion unverändert.
+
+## 2026-11-15 – Portionsrechner (Test)
+
+- Lokaler Rechner in `test/index.html`: Produktname, optionaler Barcode als Notiz, Roh-/Trocken- oder Gekocht-Basis, kcal/100 g und Grammzahl. Berechnet kcal = kcal/100 g × Gramm / 100 und übernimmt Ergebnis in vorhandenes Mahlzeitenformular (Commit `7ef0cc34b0311df7b956221edb1ffe442c670f4a`).
+- Kein Barcode-Kamerascan, keine Produktdatenbankabfrage und keine automatische Nährwerterkennung; Werte werden manuell eingegeben. Speicherung erfolgt erst mit dem vorhandenen Button „Mahlzeit speichern“.
+- GitHub-Commit und Quelltext geprüft; iPhone-Funktionstest offen. Nur `test/`, keine Produktionsdaten geändert.
