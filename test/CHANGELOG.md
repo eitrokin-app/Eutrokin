@@ -51,3 +51,10 @@
 - `test/index.html`: Button „Ernährung anpassen“ öffnet weiterhin Einstellungen, scrollt nun aber direkt zum Feld `profileDiet` und setzt den Fokus darauf (Commit `821bb94f09dd5aef8555dab9179a5b4990adfb05`).
 - Quelltextanker und GitHub-Commit geprüft; iPhone-Laufzeittest steht aus.
 - Produktive `index.html` und Nutzerdaten unverändert.
+
+## 2026-11-15 – Ernährung anpassen: Kamera statt Profil
+
+- Nutzerwunsch präzisiert: Button öffnet jetzt über ein iPhone-kompatibles Datei-Eingabefeld (`accept=image/*`, `capture=environment`) die Kamera bzw. den iOS-Auswahldialog; ersetzt vorherigen Profil-Sprung (Commit `640dee7d7f92ea43ff96d9d912fbe162e6aeb307`).
+- Aufnahme wird weder hochgeladen noch gespeichert oder analysiert. Nach Auswahl erscheint nur ein Hinweis zur manuellen Beschreibung.
+- iOS entscheidet über Kamera-/Auswahldialog und Berechtigungen; eine separate Berechtigungsabfrage wird durch diese Technik nicht garantiert.
+- Quelltextänderung auf GitHub gespeichert; tatsächlicher iPhone-Kameratest offen. Produktivversion unverändert.
