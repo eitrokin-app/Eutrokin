@@ -38,3 +38,10 @@
 - Zusätzliche Negativfälle: fehlendes Profil, fehlende Einstellungen, Objekt statt Liste, `null`-Datensatz und Weitergabe eines simulierten Speicherfehlers.
 - Darstellung an Anthrazit/Blau angepasst; keine Produktivdatei verändert.
 - Weiterhin nur nachgebildete Importlogik, kein End-to-End-Test der echten App; Browserlaufzeit und iPhone-Test ausstehend.
+
+## 2026-11-15 – Synthetischer Export-Import-Rundlauf
+
+- `test/backup-regression.html` um drei Prüfungen auf insgesamt 16 erweitert (Commit `00476d68de4365a32ba33b8dd9c9e86a9000a736`): JSON-Rundlauf mit Testgewicht und Testmahlzeit, unveränderlicher Export-Snapshot, keine Schreiboperation bei defektem JSON.
+- Nur die isolierte, rein synthetische Prüfseite verändert; kein Zugriff auf `localStorage`, produktive Dateien oder Gesundheitsdaten.
+- Quelltext und GitHub-Commit geprüft. **Noch offen:** Ausführung der 16 Tests auf dem iPhone sowie echter Datei-Export/-Import und Offline-Test in der Test-App. Diese Tests verwenden weiterhin eine Nachbildung, nicht den echten Import-Code.
+- Testlink: https://eitrokin-app.github.io/Eutrokin/test/backup-regression.html?v=20261115-16
