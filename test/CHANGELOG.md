@@ -76,3 +76,9 @@
 - Schaltfläche „Barcode mit Kamera scannen“ in `test/index.html`: startet Kamera nach Nutzeraktion und versucht EAN/UPC/ITF-Barcodes über die native Browser-API `BarcodeDetector` zu erkennen; erkannte Nummer wird ins Barcode-Feld übernommen. Online-Abfrage bleibt separate ausdrückliche Aktion.
 - Fallback auf manuelle Barcode-Eingabe bei fehlender API, verweigerter Berechtigung oder Kamerafehler. Kamerastream wird beim Schließen und beim Wechsel aus Ernährung beendet (Commits `a3ec0d04e8d9bfe48e96c9d694b4108c18bebd21`, siehe Folgecommit).
 - **Offen:** `BarcodeDetector` ist nicht in jedem iPhone-/Safari-Kontext verfügbar; realer iPhone-Test noch ausstehend. Keine externe Scanner-Bibliothek und keine Bildübertragung. Produktivversion unverändert.
+
+## 2026-11-15 – ZXing-Scanner als Alternative (Test)
+
+- Native BarcodeDetector-Erkennung in `test/index.html` durch ZXing BrowserMultiFormatReader ersetzt (Commit `a0f9de3f6c519d05c5104e8ae3202965dad068f7`). Kamera wird erst nach Nutzeraktion geöffnet; ZXing wird bei Bedarf über jsDelivr CDN geladen. Der externe CDN-Aufruf übermittelt technische Verbindungsdaten, aber keine Kamerabilder. Barcode wird lokal erkannt und nur nach separatem Klick bei Open Food Facts abgefragt.
+- Stoppt Scan beim Schließen/Tabwechsel; manuelle Eingabe bleibt möglich. Keine zusätzlichen Gebühren, aber Scanner benötigt Internet zum Nachladen der Bibliothek.
+- **Offen:** CDN-Datei und reale Erkennung auf Safari/iPhone noch nicht verifiziert; bei Ladefehler erscheint eine Meldung. Produktivversion und Nutzerdaten unverändert.
