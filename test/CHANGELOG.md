@@ -118,3 +118,9 @@
 - `test/index.html`: Foto wird lokal in einem Canvas auf 48×48 Pixel verkleinert und in einen 24-dimensionalen RGB-Farbverteilungsvektor umgewandelt. Der Vektor wird mit selbst angelernten Referenzen per Ähnlichkeitsvergleich verglichen (Commit `128664c5e64c4e849eadc9e94d74332f22d9c3bf`).
 - Nutzer kann Referenzen mit Namen anlernen (max. 50) und alle löschen. Gespeichert werden nur Name und Farbmerkmale im separaten lokalen Test-Speicher; **keine Fotos**, keine Server-Uploads, keine externen Modelle, keine Zusatzkosten.
 - **Grenze:** Das ist KEINE allgemeine KI-Lebensmittelerkennung. Ohne Referenzen gibt es keine Vorschläge; ähnlich gefärbte Gerichte können verwechselt werden. Keine automatische Kalorien-/Portionsschätzung und keine automatische Übernahme ins Mahlzeitenprotokoll. iPhone-Laufzeittest ausstehend.
+
+## 2026-11-15 – Experimentelle lokale KI-Bildklassifikation
+
+- `test/index.html`: optionaler Button „KI-Bildanalyse lokal starten (Modell-Download)“ ergänzt (Commit `800a9282e58a656312ce79969a7dec83349ec956`). TensorFlow.js 4.22.0 und MobileNet 2.1.1 werden erst auf Nutzeraktion über jsDelivr geladen; Modellgewichte werden online nachgeladen. Inferenz per `model.classify()` auf dem Bild im Browser, ohne expliziten Bild-Upload im Anwendungscode.
+- Ergebnisse sind allgemeine ImageNet-Kategorien auf Englisch, keine zuverlässige Erkennung einzelner Zutaten und keine Mengen-/Kalorienbestimmung. Fotos werden nicht durch die App an einen Bilderkennungs-API-Endpunkt gesendet. Externe Skript-/Modell-Hosts erhalten beim Download technische Verbindungsdaten. Drittanbieter-Skriptcode kann technisch nicht durch den Anwendungscode vollständig auf Datenzugriff überprüft werden.
+- Keine laufenden Gebühren; Internet beim erstmaligen Laden erforderlich, Offline-Verfügbarkeit nicht zugesichert. Alter lokaler Referenzvergleich unverändert. iPhone-Test und externe URL-Verfügbarkeit noch offen; Produktivversion unverändert.
