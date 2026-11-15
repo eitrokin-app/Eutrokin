@@ -112,3 +112,9 @@
 - `test/index.html`: sichtbare manuelle Felder „Beschreibung“ und „Kalorien“ entfernt; bestehende interne Felder für automatische Übernahme/Speicherung erhalten. Datum und Mahlzeitenwahl bleiben; „Mittagessen“ ergänzt, „Snack“ aus Auswahl entfernt (Commit `8ffeecc0ff31b1d23c4090af47bddd460712aca5`).
 - Oben zwei Aktionen: „Barcode scannen“ (bestehender ZXing-Scanner) und „Foto aufnehmen“ (nur Aufnahme; **keine automatische Fotoerkennung oder Speicherung**). Fotoaktion aus irreführender „Ernährung anpassen“-Rubrik verschoben. Bestehende Portions- und Nährwertfelder bleiben zur Überprüfung und Gewichtseingabe.
 - Keine Änderungen an bestehenden Einträgen oder Produktivversion. iPhone-Test ausstehend.
+
+## 2026-11-15 – Lokaler Fotovergleich (experimenteller Prototyp)
+
+- `test/index.html`: Foto wird lokal in einem Canvas auf 48×48 Pixel verkleinert und in einen 24-dimensionalen RGB-Farbverteilungsvektor umgewandelt. Der Vektor wird mit selbst angelernten Referenzen per Ähnlichkeitsvergleich verglichen (Commit `128664c5e64c4e849eadc9e94d74332f22d9c3bf`).
+- Nutzer kann Referenzen mit Namen anlernen (max. 50) und alle löschen. Gespeichert werden nur Name und Farbmerkmale im separaten lokalen Test-Speicher; **keine Fotos**, keine Server-Uploads, keine externen Modelle, keine Zusatzkosten.
+- **Grenze:** Das ist KEINE allgemeine KI-Lebensmittelerkennung. Ohne Referenzen gibt es keine Vorschläge; ähnlich gefärbte Gerichte können verwechselt werden. Keine automatische Kalorien-/Portionsschätzung und keine automatische Übernahme ins Mahlzeitenprotokoll. iPhone-Laufzeittest ausstehend.
