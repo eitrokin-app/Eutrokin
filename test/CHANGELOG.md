@@ -100,3 +100,9 @@
 - `test/index.html`: Scan-Ergebnis wird nach Stoppen der Kamera asynchron an die Produktabfrage übergeben; vor dem Abruf werden alte Produkt- und Nährwertfelder zurückgesetzt, um falsche Zuordnungen zu vermeiden (Commit `e791a62ba27e606e0cf0876e9d4cf176ff4c35f7`).
 - Status zeigt Barcode beim Laden und bei Fehlschlägen konkrete Fehlerkategorie bzw. HTTP-Status. Erkennung selbst blieb unverändert.
 - Ursache des iPhone-Fehlers noch nicht abschließend nachgewiesen; Live-Retest erforderlich. Nur Testversion geändert.
+
+## 2026-11-15 – Makronährwerte in Mahlzeiten speichern
+
+- `test/index.html`: Bei „Berechnung in Mahlzeit übernehmen“ werden berechnete Makronährwerte (Eiweiß, Kohlenhydrate, Fett) als Entwurf vorgemerkt; bei „Mahlzeit speichern“ werden vorhandene Werte als numerische Felder im lokalen Mahlzeiteneintrag gespeichert (Commit `7e2187e10683867f28d768e020c24285850293b1`).
+- Mahlzeitenliste zeigt vorhandene Makros in g an. Alte Einträge ohne Makrofelder bleiben unverändert und erhalten keine erfundenen Nullwerte. Manuelle Änderungen an Beschreibung oder kcal nach Übernahme verhindern die Zuordnung veralteter Makros.
+- Nur Testversion geändert; iPhone-Test der Speicherung und des Neuladens noch ausstehend.
