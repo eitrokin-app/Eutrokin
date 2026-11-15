@@ -88,3 +88,9 @@
 - `test/index.html`: Nach erfolgreicher ZXing-Barcode-Erkennung wird die Produktabfrage bei Open Food Facts automatisch ausgelöst; kleiner Kamera-Scanbereich bleibt bestehen. Kein zusätzlicher Abruf-Klick erforderlich (Commit `763289e49538becafa21f016d192cc05d3963607`).
 - Datenschutz: Kameraauswertung lokal; der erkannte Barcode wird nach erfolgreichem Scan nun **automatisch** an Open Food Facts übertragen. Der manuelle Abrufbutton bleibt als Fallback.
 - Noch offen: Ob ZXing den Barcode auf dem konkreten iPhone zuverlässig erkennt, ist nicht nachgewiesen; Live-Test erforderlich. Produktive Dateien und Nutzerdaten unverändert.
+
+## 2026-11-15 – Makronährwerte im Portionsrechner
+
+- `test/index.html`: Eiweiß, Kohlenhydrate und Fett pro 100 g werden bei Barcode-Produktabfrage aus Open Food Facts übernommen, sofern vorhanden, und anhand der Grammzahl berechnet. Felder bleiben manuell editierbar; fehlende Werte erscheinen als „k. A.“ statt 0 (Commit `5b34b0011be183744e45d64e8ba1b4f479b1c39e`).
+- Berechnung wird im Formular angezeigt; das bestehende Mahlzeitenprotokoll speichert weiterhin nur Beschreibung und Kalorien, **nicht** die Makronährwerte als eigene Felder.
+- Quelltextänderung auf GitHub gespeichert; iPhone-Laufzeittest noch offen. Produktion und Nutzerdaten unverändert.
