@@ -94,3 +94,9 @@
 - `test/index.html`: Eiweiß, Kohlenhydrate und Fett pro 100 g werden bei Barcode-Produktabfrage aus Open Food Facts übernommen, sofern vorhanden, und anhand der Grammzahl berechnet. Felder bleiben manuell editierbar; fehlende Werte erscheinen als „k. A.“ statt 0 (Commit `5b34b0011be183744e45d64e8ba1b4f479b1c39e`).
 - Berechnung wird im Formular angezeigt; das bestehende Mahlzeitenprotokoll speichert weiterhin nur Beschreibung und Kalorien, **nicht** die Makronährwerte als eigene Felder.
 - Quelltextänderung auf GitHub gespeichert; iPhone-Laufzeittest noch offen. Produktion und Nutzerdaten unverändert.
+
+## 2026-11-15 – Fehlerdiagnose Produktabruf nach Scan
+
+- `test/index.html`: Scan-Ergebnis wird nach Stoppen der Kamera asynchron an die Produktabfrage übergeben; vor dem Abruf werden alte Produkt- und Nährwertfelder zurückgesetzt, um falsche Zuordnungen zu vermeiden (Commit `e791a62ba27e606e0cf0876e9d4cf176ff4c35f7`).
+- Status zeigt Barcode beim Laden und bei Fehlschlägen konkrete Fehlerkategorie bzw. HTTP-Status. Erkennung selbst blieb unverändert.
+- Ursache des iPhone-Fehlers noch nicht abschließend nachgewiesen; Live-Retest erforderlich. Nur Testversion geändert.
