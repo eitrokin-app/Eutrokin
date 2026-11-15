@@ -82,3 +82,9 @@
 - Native BarcodeDetector-Erkennung in `test/index.html` durch ZXing BrowserMultiFormatReader ersetzt (Commit `a0f9de3f6c519d05c5104e8ae3202965dad068f7`). Kamera wird erst nach Nutzeraktion geöffnet; ZXing wird bei Bedarf über jsDelivr CDN geladen. Der externe CDN-Aufruf übermittelt technische Verbindungsdaten, aber keine Kamerabilder. Barcode wird lokal erkannt und nur nach separatem Klick bei Open Food Facts abgefragt.
 - Stoppt Scan beim Schließen/Tabwechsel; manuelle Eingabe bleibt möglich. Keine zusätzlichen Gebühren, aber Scanner benötigt Internet zum Nachladen der Bibliothek.
 - **Offen:** CDN-Datei und reale Erkennung auf Safari/iPhone noch nicht verifiziert; bei Ladefehler erscheint eine Meldung. Produktivversion und Nutzerdaten unverändert.
+
+## 2026-11-15 – Automatischer Produktabruf nach Scan
+
+- `test/index.html`: Nach erfolgreicher ZXing-Barcode-Erkennung wird die Produktabfrage bei Open Food Facts automatisch ausgelöst; kleiner Kamera-Scanbereich bleibt bestehen. Kein zusätzlicher Abruf-Klick erforderlich (Commit `763289e49538becafa21f016d192cc05d3963607`).
+- Datenschutz: Kameraauswertung lokal; der erkannte Barcode wird nach erfolgreichem Scan nun **automatisch** an Open Food Facts übertragen. Der manuelle Abrufbutton bleibt als Fallback.
+- Noch offen: Ob ZXing den Barcode auf dem konkreten iPhone zuverlässig erkennt, ist nicht nachgewiesen; Live-Test erforderlich. Produktive Dateien und Nutzerdaten unverändert.
