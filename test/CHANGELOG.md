@@ -106,3 +106,9 @@
 - `test/index.html`: Bei „Berechnung in Mahlzeit übernehmen“ werden berechnete Makronährwerte (Eiweiß, Kohlenhydrate, Fett) als Entwurf vorgemerkt; bei „Mahlzeit speichern“ werden vorhandene Werte als numerische Felder im lokalen Mahlzeiteneintrag gespeichert (Commit `7e2187e10683867f28d768e020c24285850293b1`).
 - Mahlzeitenliste zeigt vorhandene Makros in g an. Alte Einträge ohne Makrofelder bleiben unverändert und erhalten keine erfundenen Nullwerte. Manuelle Änderungen an Beschreibung oder kcal nach Übernahme verhindern die Zuordnung veralteter Makros.
 - Nur Testversion geändert; iPhone-Test der Speicherung und des Neuladens noch ausstehend.
+
+## 2026-11-15 – Mahlzeitenerfassung vereinfacht
+
+- `test/index.html`: sichtbare manuelle Felder „Beschreibung“ und „Kalorien“ entfernt; bestehende interne Felder für automatische Übernahme/Speicherung erhalten. Datum und Mahlzeitenwahl bleiben; „Mittagessen“ ergänzt, „Snack“ aus Auswahl entfernt (Commit `8ffeecc0ff31b1d23c4090af47bddd460712aca5`).
+- Oben zwei Aktionen: „Barcode scannen“ (bestehender ZXing-Scanner) und „Foto aufnehmen“ (nur Aufnahme; **keine automatische Fotoerkennung oder Speicherung**). Fotoaktion aus irreführender „Ernährung anpassen“-Rubrik verschoben. Bestehende Portions- und Nährwertfelder bleiben zur Überprüfung und Gewichtseingabe.
+- Keine Änderungen an bestehenden Einträgen oder Produktivversion. iPhone-Test ausstehend.
