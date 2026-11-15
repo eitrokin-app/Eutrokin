@@ -70,3 +70,9 @@
 - In `test/index.html` lässt sich eine Barcode-Nummer (8–14 Ziffern) nach ausdrücklichem Tippen auf „Produktdaten abrufen“ über die öffentliche Open-Food-Facts-API abfragen. Name und kcal/100 g werden bei vorhandenen Daten in den lokalen Portionsrechner übernommen (Commits `fba4b1b04b02596b3d94fa9b8c2fb0a9f1ee6055`, `53f321ce52c8c1dce324e097f14e53a68528bce9`).
 - Bei fehlenden Daten, nicht gefundenem Produkt oder Netzwerkfehler bleibt manuelle Eingabe möglich. Keine automatische Speicherung und keine Übertragung von Gesundheitsdaten; die eingegebene Barcode-Nummer wird bei Abfrage an Open Food Facts übertragen.
 - Ein Kamerascan von Barcodes ist **noch nicht** umgesetzt. iPhone-/Netzwerktest und API-Verfügbarkeit stehen aus. Keine Änderung an Produktion oder produktiven Nutzerdaten.
+
+## 2026-11-15 – Barcode-Kamerascan (Test)
+
+- Schaltfläche „Barcode mit Kamera scannen“ in `test/index.html`: startet Kamera nach Nutzeraktion und versucht EAN/UPC/ITF-Barcodes über die native Browser-API `BarcodeDetector` zu erkennen; erkannte Nummer wird ins Barcode-Feld übernommen. Online-Abfrage bleibt separate ausdrückliche Aktion.
+- Fallback auf manuelle Barcode-Eingabe bei fehlender API, verweigerter Berechtigung oder Kamerafehler. Kamerastream wird beim Schließen und beim Wechsel aus Ernährung beendet (Commits `a3ec0d04e8d9bfe48e96c9d694b4108c18bebd21`, siehe Folgecommit).
+- **Offen:** `BarcodeDetector` ist nicht in jedem iPhone-/Safari-Kontext verfügbar; realer iPhone-Test noch ausstehend. Keine externe Scanner-Bibliothek und keine Bildübertragung. Produktivversion unverändert.
