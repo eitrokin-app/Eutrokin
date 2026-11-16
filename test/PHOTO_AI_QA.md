@@ -30,3 +30,13 @@ Stand: 15. November 2026. Diese Datei enthält keine persönlichen Daten.
 ## Status
 
 Dokumentationspaket, keine Laufzeitänderung. Der aktuelle Modellwechsel ist **nicht** implementiert und erfordert weitere technische Prüfung.
+
+## 16. November 2026 – Sicherung der Bildanalyse-Bedienung
+
+Commit `66743030565730563ef8a80394328d0a3f0e9dd3` in `test/index.html`:
+- Während einer KI-Analyse ist der Startbutton deaktiviert, um versehentliche parallele Modellaufrufe zu vermeiden.
+- Bei Foto-Wechsel während einer laufenden Analyse werden alte Ergebnisse nicht mehr als Ergebnis des neuen Fotos angezeigt.
+- Bei einer Top-Kategorie unter 50 % wird die geringe Modellkonfidenz ausdrücklich benannt; außerdem klare Warnung vor Kochgeschirr-Treffern und fehlender Zutaten-/Kalorienbestimmung.
+- Barcode und Referenzspeicher wurden nicht absichtlich verändert; iPhone-Regressionsprüfung steht aus. Keine Änderung an der produktiven App.
+
+**Manueller iPhone-Test:** Foto auswählen, KI-Button doppelt tippen (nur ein Lauf), während der Analyse ein anderes Foto auswählen (kein altes Ergebnis), Ergebnis mit Warnhinweis prüfen. Modellwechsel weiterhin offen.
