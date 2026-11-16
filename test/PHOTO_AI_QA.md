@@ -40,3 +40,9 @@ Commit `66743030565730563ef8a80394328d0a3f0e9dd3` in `test/index.html`:
 - Barcode und Referenzspeicher wurden nicht absichtlich verändert; iPhone-Regressionsprüfung steht aus. Keine Änderung an der produktiven App.
 
 **Manueller iPhone-Test:** Foto auswählen, KI-Button doppelt tippen (nur ein Lauf), während der Analyse ein anderes Foto auswählen (kein altes Ergebnis), Ergebnis mit Warnhinweis prüfen. Modellwechsel weiterhin offen.
+
+## 16. November 2026 – Foto → Mahlzeitenprotokoll (MVP)
+
+Commit `f7aeb73933ccd30ff438ced762722092fc510840`: Nach Fotoaufnahme kann ein **vom Nutzer bestätigter/berichtiger Name** mit „Bestätigten Namen als Mahlzeit übernehmen“ in die bestehende Mahlzeitenerfassung übertragen und gespeichert werden. Kalorien bleiben bei fehlender verlässlicher Quelle **unbekannt (null)**, statt sie zu erfinden. Die Barcode-Nährwertberechnung und das getrennte Testdatenformat bleiben erhalten. iPhone-Funktionstest ausstehend.
+
+**Abnahme:** Foto → Namen prüfen/korrigieren → übernehmen → Datum/Mahlzeit auswählen → speichern → Protokolleintrag mit Name, ohne erfundene kcal prüfen. Anschließend Barcode-Produkt weiterhin auf korrekte Kalorien und Makros testen.
