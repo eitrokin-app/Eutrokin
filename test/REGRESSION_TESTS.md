@@ -45,3 +45,9 @@ Pro Prüffall festhalten: Datum, Gerät/iOS, Safari oder Homescreen, Ergebnis (b
 Test-Commit `8785bd09d22166707fdbfc04a9782f9f0ac93687`: Beim Auswählen eines neuen Fotos wird die alte Vorschau ausgeblendet und der bisherige Foto-Vektor verworfen. Wenn eine ältere Bilddekodierung erst nach einer neueren abgeschlossen wird, wird ihr Ergebnis ignoriert. Dadurch soll keine alte Mahlzeit versehentlich unter einem neuen Foto übernommen werden. Die produktive App wurde nicht verändert.
 
 **Zusatztest R13 (noch nicht auf iPhone geprüft):** Zwei unterschiedliche Fotos zügig nacheinander auswählen; nur das zuletzt gewählte Foto darf als Vorschau und Übernahmegrundlage erscheinen. Anschließend den Mahlzeiten- und Barcode-Ablauf wie bisher prüfen.
+
+## 17. November 2026 – iPhone-Barcodeerkennung
+
+Nutzer meldet: Kameravorschau läuft, aber Barcodes werden nicht erkannt. Test-Commit `4726290026282d78a280c1f59889f388477910aa` fordert über ZXing `decodeFromConstraints` explizit die rückseitige Kamera (`facingMode: environment`) und bevorzugt 1280×720 Videoauflösung an. Die Geräte können diese Idealwerte abweichend erfüllen. Ein Hinweis zu Abstand und Schärfe erscheint. **Ursache nicht bewiesen; iPhone-Abnahme ausstehend.** Kein Eingriff in Produktion.
+
+**R14:** Nach erneutem Öffnen des Scanners Rückkamera und Schärfe prüfen; EAN-13 eines unkritischen Testprodukts scannen, Barcodefeld und anschließende Open-Food-Facts-Abfrage prüfen. Bei Fehlschlag Screenshot der Statuszeile und Angabe Safari vs. Homescreen erfassen. Auch Abbrechen und Wiederöffnen prüfen.
