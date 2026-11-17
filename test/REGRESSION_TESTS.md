@@ -65,3 +65,9 @@ Nach Nutzerprüfung funktioniert die native Rotationslösung auf dem iPhone nich
 ## 17. November 2026 – R17 ZXing-Bilddekodierung
 
 Nutzer bestätigt, dass die vorherige `decodeFromCanvas`-Variante auf dem iPhone als nicht verfügbar gemeldet wird. Test-Commit `8f952413ce7a943acaec9606cac7b4748bfa2089` verwendet stattdessen versuchsweise `decodeFromImageElement` mit einem lokal erzeugten, um ±90° gedrehten Canvas-Bild. Die Hauptkameraerkennung bleibt bestehen; Bilder werden durch diese Funktion nicht an einen Server geschickt. **iPhone-Kompatibilität und Erfolg sind ungetestet.** R17: Senkrechte Ziffern prüfen, danach waagerechte; bei Fehler Statusmeldung und Browsermodus notieren. Produktion unverändert.
+
+## 18. November 2026 – R18 Foto-KI: Mehrfachstart verhindern
+
+Nach Codeprüfung wurde festgestellt, dass `analyzeFoodWithAI()` zwar einen Lade-/Deaktivierungszustand für `foodAIButton` besitzt, der Button im HTML aber keine entsprechende ID hatte. Test-Commit `d12ccb238a1de5d6a1b14567f8be3cb2f10aade0` ergänzt die ID und vereinfacht den Startaufruf. Während der laufenden Analyse wird die Schaltfläche nun über den vorhandenen Funktionscode deaktiviert und anschließend wieder freigegeben. Das bestehende `foodAIAnalyzing`-Flag bleibt als zweite Sperre erhalten. **Statisch geprüft:** genau eine passende Button-ID im HTML, Commit durch erneutes Lesen bestätigt. **Nicht auf iPhone getestet.**
+
+**R18 (bei nächstem Foto-KI-Test):** Ein Foto auswählen, KI starten, prüfen, dass der Button während des Ladevorgangs deaktiviert und anschließend wieder bedienbar wird. Bei einem fehlgeschlagenen Modell-Download muss eine verständliche Fehlermeldung erscheinen. Keine automatischen Kalorienwerte übernehmen; keine privaten Fotos verwenden. Produktive `index.html` unverändert.
