@@ -61,3 +61,7 @@ Nutzer bestätigt: EAN-Barcode wird mit waagerechten Ziffern erkannt; Produktdat
 ## 17. November 2026 – Rotationsscan mit ZXing (Experiment)
 
 Nach Nutzerprüfung funktioniert die native Rotationslösung auf dem iPhone nicht. Commit `6cab8818d98b1e179a8d0604d4b8a08b5a9384e2` ersetzt deren Aufruf durch einen optionalen ZXing-Canvas-Decoder: jeweils um +90° und −90° gedrehte Videoframes werden zusätzlich geprüft, falls `decodeFromCanvas` in der geladenen ZXing-Version vorhanden ist. Andernfalls erscheint ein Hinweis und der bewährte Hauptscanner läuft weiter. **Die Verfügbarkeit und tatsächliche Funktion von `decodeFromCanvas` auf dem iPhone sind noch nicht bestätigt.** R16: Waagerechte und senkrechte EAN-Ziffern, Datenabruf und Schließen/erneutes Öffnen prüfen. Keine Produktionsänderung.
+
+## 17. November 2026 – R17 ZXing-Bilddekodierung
+
+Nutzer bestätigt, dass die vorherige `decodeFromCanvas`-Variante auf dem iPhone als nicht verfügbar gemeldet wird. Test-Commit `8f952413ce7a943acaec9606cac7b4748bfa2089` verwendet stattdessen versuchsweise `decodeFromImageElement` mit einem lokal erzeugten, um ±90° gedrehten Canvas-Bild. Die Hauptkameraerkennung bleibt bestehen; Bilder werden durch diese Funktion nicht an einen Server geschickt. **iPhone-Kompatibilität und Erfolg sind ungetestet.** R17: Senkrechte Ziffern prüfen, danach waagerechte; bei Fehler Statusmeldung und Browsermodus notieren. Produktion unverändert.
