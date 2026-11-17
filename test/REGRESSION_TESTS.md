@@ -51,3 +51,9 @@ Test-Commit `8785bd09d22166707fdbfc04a9782f9f0ac93687`: Beim Auswählen eines ne
 Nutzer meldet: Kameravorschau läuft, aber Barcodes werden nicht erkannt. Test-Commit `4726290026282d78a280c1f59889f388477910aa` fordert über ZXing `decodeFromConstraints` explizit die rückseitige Kamera (`facingMode: environment`) und bevorzugt 1280×720 Videoauflösung an. Die Geräte können diese Idealwerte abweichend erfüllen. Ein Hinweis zu Abstand und Schärfe erscheint. **Ursache nicht bewiesen; iPhone-Abnahme ausstehend.** Kein Eingriff in Produktion.
 
 **R14:** Nach erneutem Öffnen des Scanners Rückkamera und Schärfe prüfen; EAN-13 eines unkritischen Testprodukts scannen, Barcodefeld und anschließende Open-Food-Facts-Abfrage prüfen. Bei Fehlschlag Screenshot der Statuszeile und Angabe Safari vs. Homescreen erfassen. Auch Abbrechen und Wiederöffnen prüfen.
+
+## 17. November 2026 – optionaler Rotationsscan
+
+Nutzer bestätigt: EAN-Barcode wird mit waagerechten Ziffern erkannt; Produktdaten und Kalorien werden geladen. Mit senkrechten Ziffern keine Erkennung. Test-Commit `55c07ce04b166ebef289d1c1c6773abe0165f6ff` ergänzt **optional** eine zweite lokale Auswertung: Wenn der Browser `BarcodeDetector` mit EAN/UPC unterstützt, wird das Kamerabild periodisch um 90° gedreht auf einem Canvas geprüft. ZXing bleibt unverändert als Hauptscanner; der zusätzliche Timer wird beim Schließen beendet. Keine Bildübertragung durch diesen Zusatz. **Nicht auf dem iPhone getestet; iOS-Safari-Unterstützung von BarcodeDetector ist nicht garantiert.**
+
+**R15:** EAN mit waagerechten und senkrechten Ziffern scannen; Produktdaten kontrollieren; Scanner schließen und erneut öffnen; bei ausbleibender Rotationsfunktion Browser/Version notieren. Nur fiktive Testdaten.
