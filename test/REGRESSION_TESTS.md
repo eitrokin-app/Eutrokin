@@ -39,3 +39,9 @@ Pro Prüffall festhalten: Datum, Gerät/iOS, Safari oder Homescreen, Ergebnis (b
 ## Status
 
 2026-11-16: Testfälle und erwartete Ergebnisse dokumentiert. **Keine iPhone-Ausführung oder erfolgreiche Regression behauptet.**
+
+## 17. November 2026 – Schutz vor überholten Fotoergebnissen
+
+Test-Commit `8785bd09d22166707fdbfc04a9782f9f0ac93687`: Beim Auswählen eines neuen Fotos wird die alte Vorschau ausgeblendet und der bisherige Foto-Vektor verworfen. Wenn eine ältere Bilddekodierung erst nach einer neueren abgeschlossen wird, wird ihr Ergebnis ignoriert. Dadurch soll keine alte Mahlzeit versehentlich unter einem neuen Foto übernommen werden. Die produktive App wurde nicht verändert.
+
+**Zusatztest R13 (noch nicht auf iPhone geprüft):** Zwei unterschiedliche Fotos zügig nacheinander auswählen; nur das zuletzt gewählte Foto darf als Vorschau und Übernahmegrundlage erscheinen. Anschließend den Mahlzeiten- und Barcode-Ablauf wie bisher prüfen.
