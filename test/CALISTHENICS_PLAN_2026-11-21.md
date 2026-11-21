@@ -1,6 +1,6 @@
 # EUTRO∞KIN – Calisthenics: neues Trainingsmodul (Planung, 21.11.2026)
 
-Status: PLAN / nur isolierte Testversion. Noch keine Änderung an Trainingsoberfläche oder produktiver App.
+Status (22.11.2026): Testmodul mit sechs Übungskarten, zwei Stufen und schematischen Start-/Endpositionen unter `test/index.html` vorhanden. Noch keine fachlich geprüften Profi-Illustrationen oder Avatar-Funktion. Produktivversion unverändert.
 
 ## Ziel
 Neue Rubrik „Calisthenics“ innerhalb des vorhandenen Tabs „Training“, neben HIIT und Dehnen & Yoga. Eigengewichtstraining für Anfänger, Fortgeschrittene und Profis; keine Planks gemäß bisheriger Präferenz.
@@ -30,3 +30,19 @@ Keine Gesundheitsdaten erheben oder auswerten; keine medizinischen Individualemp
 
 ## Testlink (bestehende Testumgebung; Modul noch nicht implementiert)
 https://eitrokin-app.github.io/Eutrokin/test/
+
+
+## Prüfprotokoll 22.11.2026 – Illustrationen (ohne Bildfreigabe)
+
+**Repositoryprüfung:** `test/index.html` enthält die Calisthenics-Rubrik, den Einstieg über Training, drei Anfänger- und drei Fortgeschrittenen-Übungen, je zwei SVG-Posen. Bestehende Testdaten liegen unter dem separaten Präfix `eutro-test-v1:`. Die bisherige Zeichnung ist ausdrücklich schematisch, nicht anatomisch geprüft.
+
+**Qualitätsschranke vor Bildersatz:**
+- Für jede der sechs Übungen zwei getrennte, klar zuordenbare Ansichten erstellen (Start/Ende), keine Collage mit abweichenden Übungen.
+- Übungsnamen und tatsächliche Anleitung müssen übereinstimmen; keine Planks, Bench Dips oder andere ungewünschte Ersatzübungen.
+- Perspektive, Gelenkpositionen, Geräte/Stabilität und Bewegungsrichtung fachlich prüfen; KI-generierte Anatomie nicht ungeprüft übernehmen.
+- Muskelmarkierungen nur nach Prüfung; Farbcodes zusätzlich beschriften.
+- Bilder unter `test/` lokal bereitstellen, keine externen Bild-CDNs oder Uploads von Nutzerfotos.
+- Dateigrößen für iPhone und Offlinebetrieb optimieren; Bilder mit aussagekräftigem Alternativtext versehen.
+- Vor Ersetzung auf iPhone prüfen: beide Stufen, sechs Übungen, Hoch-/Querformat, Ladeverhalten und Zurück-Navigation.
+
+**Noch offen:** Die zuletzt gezeigte Design-Collage ist keine geprüfte Übungsillustration und darf nicht als fertiges Asset eingebaut werden. Kein iPhone-Test für einen neuen Bildersatz erfolgt. Nächster Entwicklungsschritt: einzelne fachlich prüfbare Illustrationen als Dateien erstellen, anschließend erst `test/index.html` darauf umstellen.
