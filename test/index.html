@@ -91,17 +91,17 @@ lunge:[["M90 38L90 76L80 112 M90 76L105 112 M90 48L70 70","M90 50L90 83L120 83L1
 wall:[["M90 38L90 76L75 112 M90 76L105 112 M90 48L65 65L65 38 M90 48L115 65L115 38","M90 38L90 76L75 112 M90 76L105 112 M90 48L72 25L72 12 M90 48L108 25L108 12"],[[90,25],[90,25]],"Arme an der Wand nach oben führen"],
 rotate:[["M90 38L90 76L75 112 M90 76L105 112 M90 48L78 72L90 65 M90 48L102 72L90 65","M90 38L90 76L75 112 M90 76L105 112 M90 48L78 72L50 65 M90 48L102 72L130 65"],[[90,25],[90,25]],"Unterarme nach außen drehen; Ellenbogen am Rumpf"],
 shoulders:[["M90 38L90 76L75 112 M90 76L105 112 M90 48L70 80 M90 48L110 80","M90 38L90 76L75 112 M90 76L105 112 M90 48L48 48 M90 48L132 48"],[[90,25],[90,25]],"Arme seitlich kontrolliert anheben und senken"],
-child:[["M48 65L92 65L92 112L125 112 M48 65L48 112","M48 91L108 85L92 112L125 112 M48 91L12 112"],[[36,55],[36,85]],"Gesäß vorsichtig Richtung Fersen führen"],
+child:[["M48 65L92 65L92 112L125 112 M48 65L48 112","M48 91L108 85L92 112L125 112 M48 91L25 108L12 112"],[[36,55],[36,85]],"Gesäß vorsichtig Richtung Fersen führen"],
 hipflex:[["M90 38L90 76L55 112 M90 76L125 112 M90 48L70 70","M100 38L100 76L55 112 M100 76L125 87L125 112 M100 48L80 70"],[[90,25],[100,25]],"Becken im versetzten Stand leicht nach vorne verlagern"],
 
-bridge:[['M38 112L85 112L116 79L145 112L163 112','M38 112L85 82L116 79L145 112L163 112'],[[25,102],[25,102]],'Becken anheben und absenken'],
+bridge:[['M38 112L85 112L116 79L145 112L163 112','M38 112L85 82L116 79L145 112L163 112'],[[25,102],[25,102]],'Becken anheben, bis Schultern, Hüfte und Knie annähernd eine Linie bilden; kontrolliert absenken'],
 calf:[['M90 38L90 78L90 112L111 112 M90 48L70 70 M90 48L110 70','M90 29L90 69L90 102L111 112 M90 39L70 61 M90 39L110 61'],[[90,25],[90,16]],'Fersen anheben und absenken'],
 push:[['M70 42L52 80L35 112L55 112 M70 42L105 52L145 52','M94 42L70 80L35 112L55 112 M94 42L115 70L145 52'],[[75,29],[99,29]],'Zur Wand beugen und zurückdrücken'],
 heel:[['M38 112L85 112L115 78L145 112L163 112','M38 112L85 112L125 108L165 112'],[[25,102],[25,102]],'Ferse am Boden vor und zurück schieben'],
-bird:[['M48 65L92 65L92 112L125 112 M48 65L48 112','M48 65L92 65L142 65 M92 65L92 112L125 112 M48 65L48 112 M48 65L10 65'],[[36,55],[36,55]],'Gegenüberliegenden Arm und Bein strecken'],
-side:[['M38 100L85 100L155 112 M85 100L155 100','M38 100L85 100L155 112 M85 100L145 65'],[[25,90],[25,90]],'Oberes Bein seitlich anheben'],
+bird:[['M48 65L92 65L92 112L125 112 M48 65L48 112','M48 65L92 65 M92 65L142 65L165 65 M92 65L92 112L125 112 M48 65L48 112L60 112 M48 65L10 65'],[[36,55],[36,55]],'Gegenüberliegenden Arm und Bein bis etwa Rumpfhöhe strecken; Becken ruhig halten, anschließend Seiten wechseln'],
+side:[['M38 100L85 100L155 112 M85 100L155 100','M38 100L85 100L155 112 M85 100L145 65'],[[25,90],[25,90]],'Oberes Bein aus der Seitenlage kontrolliert anheben und senken; Becken nicht nach hinten drehen'],
 stand:[['M90 38L90 76L75 112 M90 76L105 112 M90 48L65 70 M90 48L115 70','M90 38L90 76L75 112 M90 76L112 76L112 98 M90 48L65 70 M90 48L115 70'],[[90,25],[90,25]],'Ein Bein anheben; bei Bedarf festhalten'],
-ankle:[['M50 50L50 82L95 82L95 112L120 112','M50 50L50 82L95 82L95 112L115 94'],[[50,37],[50,37]],'Fuß anziehen und wieder lösen']
+ankle:[['M50 50L50 82L95 82L95 112L120 112','M50 50L50 82L95 82L95 112L115 94'],[[50,37],[50,37]],'Fuß im Sitzen zum Schienbein ziehen und kontrolliert wieder absenken']
 };const p=poses[key];if(!p)return '';return '<div style="display:flex;gap:8px;flex-wrap:wrap">'+p[0].map((d,i)=>'<figure style="flex:1;min-width:125px;margin:0"><svg viewBox="0 0 180 130" role="img" aria-label="'+esc(p[2])+' – '+(i?'Bewegung':'Start')+'" style="width:100%;background:#102c38;border-radius:12px"><path d="M8 114H172'+(key==='push'?' M145 10V114':key==='squat'?' M20 85H55V114 M20 85V114':'')+'" stroke="#78949a" stroke-width="2"/><g fill="none" stroke="#b5edf0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="'+p[1][i][0]+'" cy="'+p[1][i][1]+'" r="9"/><path d="'+d+'"/></g></svg><figcaption class="muted">'+(i?'Bewegung':'Start')+'</figcaption></figure>').join('')+'</div><p class="muted">'+esc(p[2])+'. Schematisch, fachlich ungeprüft; keine Muskelbelastungsanalyse.</p>'}
 // Release sprint: qualitative muscle involvement, not measured activation or anatomical validation.
 function sprintMuscles(key, isMobility=false){
